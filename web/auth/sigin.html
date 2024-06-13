@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ежедневник - Авторизация</title>
+  <link rel="stylesheet" href="../../styles/auth/sigin.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="index.html">
+          <img src="logo.svg" alt="Ежедневник">
+        </a>
+      </div>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="tasks.html">Задачи</a></li>
+        <li><a href="settings.html">Настройки</a></li>
+        <li><a href="login.html" class="active">Авторизация</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="login-container">
+      <h1>Авторизация</h1>
+      <form>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Пароль:</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn">Войти</button>
+      </form>
+      <p>Еще нет аккаунта? <a href="register.html">Зарегистрироваться</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Ежедневник. Все права защищены.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

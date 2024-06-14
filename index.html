@@ -16,9 +16,9 @@
       <ul>
         <li><a href="#">Главная</a></li>
         <li><a href="./web/createTodo.html">Создать задачу</a></li>
-        <li><a href="#">Настройки</a></li>
+        <li><a href="./web/setting.html">Настройки</a></li>
       </ul>
-      <a href="./web/auth/sigup.html" class="profile-btn">
+      <a href="./web/auth/sigin.html" class="profile-btn">
         <i class="icon-user"></i>
         Профиль
       </a>
@@ -71,6 +71,11 @@
     <p>&copy; 2023 Ежедневник. Все права защищены.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+      document.querySelector('.main-btn').addEventListener('click', function() {
+      this.classList.toggle('show');
+      document.querySelector('.social-buttons').classList.toggle('show');
+  });
+  </script>
 </body>
 </html>

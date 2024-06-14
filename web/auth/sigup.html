@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация</title>
     <link rel="stylesheet" href="../../styles/auth/sigup.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -14,10 +17,39 @@
                 <li><a href="../../index.html">Главная</a></li>
                 <li><a href="#">Задачи</a></li>
                 <li><a href="#">Настройки</a></li>
-                <li><a href="#"></a>Регистрация</li>
             </ul>
+            <li>Регистрация</li>
         </nav>
     </header>
+
+    <main>
+        <div class="create-user-container">
+            <h1>Регистрация</h1>
+            <form action="../../index.html" class="create-user-form">
+                <div class="from-group">
+                    <label for="first-name">Имя</label>
+                    <input type="text" name="first-name" id="first-name">
+                </div>
+
+                <div class="from-group">
+                    <label for="last-name">Фамилия</label>
+                    <input type="text" name="last-name" id="last-name">
+                </div>
+                <div class="from-group">
+                    <label for="email-user">Электронная почта</label>
+                    <input type="email" name="email-user" id="email-user">
+                </div>
+                <div class="from-group">
+                    <label for="pass-user">Пароль</label>
+                    <input type="password" name="pass-user" id="pass-user">
+                </div>
+
+                <div class="from-group">
+                    <button type="submit" class="submit-reg">Регистрация</button>
+                </div>
+            </form>
+        </div>
+    </main>
 
 
 

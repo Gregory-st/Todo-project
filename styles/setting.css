@@ -8,6 +8,7 @@ body {
     font-family: 'Roboto', sans-serif;
     background-color: #f5f5f5;
     color: #333;
+    height: 1000px;
 }
 
 header {
@@ -56,4 +57,100 @@ nav ul li a {
     font-weight: normal;
     text-decoration: none;
     font-size: 1rem;
+}
+
+.holder{
+    position: absolute;
+    margin-top: 10px;
+    border-radius: 0 10px 10px 0;
+    width: 15%;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.containers{
+    margin-top: 5%;
+}
+
+.container{
+    max-width: 600px;
+    margin: 10px auto;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hlink{
+    display: flex;
+    margin: 2rem;
+    padding: 1rem;
+    border-radius: 10px;
+    justify-content: center;
+    color: black;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 1rem;
+    box-shadow: 0 0px 15px #4CAF50;
+}
+
+.hlink:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0px 15px #4caf4f63;
+}
+
+.active{
+    margin: 20px 10px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.active:hover{
+    background-color: #419639;
+    color: rgb(255, 255, 255);
+    transform: scale(1.02);
+}
+
+.beforb{
+    font-size: 1rem;
+    min-width: 50%;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #419639;
+    color: white;
+    font-weight: bold;
+    border-color: transparent;
+}
+
+.transformhover:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.userphoto{
+    width: 100px;
+    height: 100px;
+    border-radius: 10%;
+    padding: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.userphoto:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+#person nav{
+    margin-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.personinfo{
+    width: 100%;
+    margin-right: 5%;
 }

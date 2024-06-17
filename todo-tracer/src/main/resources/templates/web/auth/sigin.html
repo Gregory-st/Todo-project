@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div th:insert="blocks/auth/siginStyle :: styles"></div>
+
+    <header>
+        <nav>
+            <div class="logo">Ежедневник</div>
+            <ul>
+                <li><a href="../../todo">Главная</a></li>
+                <li><a href="#">Задачи</a></li>
+                <li><a href="../../todo/setting">Настройки</a></li>
+            </ul>
+            <li>Вход</li>
+        </nav>
+    </header>
+
+    <main>
+        <div class="create-user-container">
+            <h1>Вход</h1>
+            <form action="../../todo" class="create-user-form">
+                <div class="from-group">
+                    <label for="email-user">Электронная почта</label>
+                    <input type="email" name="email-user" id="email-user">
+                </div>
+                <div class="from-group">
+                    <label for="pass-user">Пароль</label>
+                    <input type="password" name="pass-user" id="pass-user" >
+                </div>
+                <div class="from-group">
+                    <nav class="content-button">
+                        <button type="submit" class="submit-auth">Вход</button>
+                        <a class="submit-reg" href="./register">Регистрация</a>
+                    </nav>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer></footer>
+</body>
+</html>

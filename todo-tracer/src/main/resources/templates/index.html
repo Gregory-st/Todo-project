@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ежедневник</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div th:insert="blocks/indexstyle :: styles"></div>
+
+  <header>
+    <nav>
+      <div class="logo">Ежедневник</div>
+      <ul>
+        <li><a href="#">Главная</a></li>
+        <li><a href="./todo/createTodo">Создать задачу</a></li>
+        <li><a href="./todo/setting">Настройки</a></li>
+      </ul>
+      <a href="./todo/person/auth" class="profile-btn">
+        <i class="icon-user"></i>
+        Профиль
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="calendar-tasks-container">
+      <div class="calendar">
+        <div class="calendar-header">
+          <button class="prev-month">
+            <i class="icon-arrow-left"></i>
+          </button>
+          <h2 class="current-month">Июнь 2024</h2>
+          <button class="next-month">
+            <i class="icon-arrow-right"></i>
+          </button>
+        </div>
+        <div class="calendar-days">
+          <!-- Здесь будут дни календаря -->
+        </div>
+      </div>
+      <div class="tasks">
+        <div class="tasks-header">
+          <h2>Задачи</h2>
+          <button class="add-task-btn">
+            <i class="icon-plus"></i>
+            Новая задача
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <h3>Фильтры</h3>
+      <div class="filters">
+        <!-- Здесь будут фильтры -->
+      </div>
+      <h3>Сортировка</h3>
+      <div class="sorting">
+        <!-- Здесь будет сортировка -->
+      </div>
+    </div>
+  </main>
+
+  <div class="tasks-list">
+    <!-- Здесь будут задачи -->
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Ежедневник. Все права защищены.</p>
+  </footer>
+
+  <script>
+      document.querySelector('.main-btn').addEventListener('click', function() {
+      this.classList.toggle('show');
+      document.querySelector('.social-buttons').classList.toggle('show');
+  });
+  </script>
+</body>
+</html>

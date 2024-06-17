@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройки</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div th:insert="blocks/settingStyle :: styles"></div>
+
+    <header>
+        <nav>
+            <div class="logo">Ежедневник</div>
+            <ul>
+                <li><a href="../todo">Главная</a></li>
+                <li><a href="#">Задачи</a></li>
+            </ul>
+            <li>Настройки</li>
+        </nav>
+    </header>
+
+    <div class="holder">
+        <a href="#person" class="hlink">Персональные данные</a>
+        <a href="#" class="hlink"></a>
+        <a href="#" class="hlink"></a>
+    </div>
+    <main>
+        <div class="containers">
+            <div class="container" id="person">
+                <nav>
+                    <div class="personinfo">
+                        <div class="firstname active">
+                            <p>Фамилия</p>
+                        </div>
+                        <div class="lastname active">
+                            <p>Имя</p>
+                        </div>
+                    </div>
+                    <img src="../examples/Profil1.png" alt="Фото профиля" class="userphoto">
+                </nav>
+                <div class="email active">
+                    <p>Почта</p>
+                </div>
+                <div class="password active">
+                    <p>Пароль</p>
+                </div>
+
+                <button class="beforb transformhover">Редактировать</button>
+            </div>
+            <div class="container" id=""></div>
+            <div class="container"></div>
+        </div>
+    </main>
+
+    <footer></footer>
+</body>
+</html>

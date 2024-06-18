@@ -1,12 +1,7 @@
 package com.tracer.todo_tracer.entity;
 
 import com.tracer.todo_tracer.priority.TodoPriority;
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.EnumType;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -29,4 +24,8 @@ public class TodoEntity {
 
     @Enumerated(EnumType.STRING)
     private TodoPriority todoPriority;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 }

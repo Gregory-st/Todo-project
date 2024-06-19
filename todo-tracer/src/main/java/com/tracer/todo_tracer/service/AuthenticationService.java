@@ -21,12 +21,12 @@ public class AuthenticationService {
     private final AuthenticationManager manager;
 
     public String registration(RegistrationDto regDto){
-
         UserEntity user = UserEntity
                 .builder()
                 .firstname(regDto.getFirstname())
                 .lastname(regDto.getLastname())
                 .email(regDto.getEmail())
+                .login(regDto.getLogin())
                 .password(passwordEncoder.encode(regDto.getPassword()))
                 .build();
 
@@ -37,7 +37,7 @@ public class AuthenticationService {
         return "/v1/todo/person/auth";
     }
 
-    public String authentication(AuthenticationDto authDto){
+    public UserEntity authentication(AuthenticationDto authDto){
 
         manager.authenticate(
           new UsernamePasswordAuthenticationToken(
@@ -51,6 +51,8 @@ public class AuthenticationService {
                 .orElseThrow();
 
         user.setToken(jwtService.generateToken(user));
-        return "/v1/todo";
+        userRepository.save(user);
+
+        return user;
     }
 }

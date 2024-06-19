@@ -7,10 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style th:replace="blocks/auth/siginStyle :: styles"></style>
 </head>
 <body>
-    <div th:insert="blocks/auth/siginStyle :: styles"></div>
-
     <header>
         <nav>
             <div class="logo">Ежедневник</div>
@@ -26,14 +25,15 @@
     <main>
         <div class="create-user-container">
             <h1>Вход</h1>
-            <form class="create-user-form" method="post">
+            <h3 class="except" th:if="${param.err}">Не верный логин или пароль</h3>
+            <form th:object="${user}" class="create-user-form" method="post">
                 <div class="from-group">
                     <label for="email-user">Электронная почта</label>
-                    <input type="email" name="email_user" id="email-user">
+                    <input type="text" name="email" id="email-user">
                 </div>
                 <div class="from-group">
                     <label for="pass-user">Пароль</label>
-                    <input type="password" name="pass_user" id="pass-user" >
+                    <input type="password" name="password" id="pass-user" >
                 </div>
                 <div class="from-group">
                     <nav class="content-button">

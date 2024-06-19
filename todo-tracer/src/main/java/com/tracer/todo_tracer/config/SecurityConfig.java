@@ -35,7 +35,7 @@ public class SecurityConfig {
 
                 .exceptionHandling(exception -> exception.authenticationEntryPoint((request, response, authException) -> {
                     response.setStatus(400);
-                    response.sendRedirect("/v1/todo/person/register");
+                    response.sendRedirect(request.getRequestURI() + "?err");
                 }))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

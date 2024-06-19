@@ -7,10 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style th:replace="blocks/auth/sigupStyle.html"></style>
 </head>
 <body>
-    <div th:insert="blocks/auth/sigupStyle.html"></div>
-
     <header>
         <nav>
             <div class="logo">Ежедневник</div>
@@ -26,23 +25,28 @@
     <main>
         <div class="create-user-container">
             <h1>Регистрация</h1>
-            <form class="create-user-form" method="post">
+            <h3 class="except" th:if="${param.err}">Не все поля были заполнены</h3>
+            <form th:object="${user}" class="create-user-form" method="post">
                 <div class="from-group">
-                    <label for="first-name">Имя</label>
-                    <input type="text" name="first_name" id="first-name">
+                    <label for="firstname">Имя</label>
+                    <input type="text" id="firstname" name="firstname">
                 </div>
 
                 <div class="from-group">
-                    <label for="last-name">Фамилия</label>
-                    <input type="text" name="last_name" id="last-name">
+                    <label for="lastname">Фамилия</label>
+                    <input type="text" id="lastname" name="lastname">
                 </div>
                 <div class="from-group">
-                    <label for="email-user">Электронная почта</label>
-                    <input type="email" name="email_user" id="email-user">
+                    <label for="email">Электронная почта</label>
+                    <input type="email" id="email" name="email">
                 </div>
                 <div class="from-group">
-                    <label for="pass-user">Пароль</label>
-                    <input type="password" name="pass_user" id="pass-user">
+                    <label for="login">Логин</label>
+                    <input type="text" id="login" name="login">
+                </div>
+                <div class="from-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" name="password">
                 </div>
 
                 <div class="from-group">

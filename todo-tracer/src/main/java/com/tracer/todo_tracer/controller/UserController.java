@@ -1,15 +1,13 @@
 package com.tracer.todo_tracer.controller;
 
-import ch.qos.logback.core.model.Model;
+import com.tracer.todo_tracer.entity.UserEntity;
+import org.springframework.ui.Model;
 import com.tracer.todo_tracer.dto.AuthenticationDto;
 import com.tracer.todo_tracer.dto.RegistrationDto;
 import com.tracer.todo_tracer.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/v1/todo/person")
@@ -25,19 +23,14 @@ public class UserController {
 
     @PostMapping("/auth")
     public String authUser(
-            @RequestParam String email_user,
-            @RequestParam String pass_user,
+            @ModelAttribute AuthenticationDto user,
             Model model
-            ){
+    ){
 
-        String page = authService.authentication(AuthenticationDto
-                .builder()
-                .email(email_user)
-                .password(pass_user)
-                .build()
-        );
+        model.addAttribute("user", user);
+        UserEntity userEntity = authService.authentication(user);
 
-        return "redirect:" + page;
+        return "redirect:/v1/todo/" + userEntity.getLogin();
     }
 
     @GetMapping("/register")
@@ -47,21 +40,13 @@ public class UserController {
 
     @PostMapping("/register")
     public String regUser(
-            @RequestParam String first_name,
-            @RequestParam String last_name,
-            @RequestParam String email_user,
-            @RequestParam String pass_user,
+            @ModelAttribute RegistrationDto user,
             Model model
     ){
+        model.addAttribute("user", user);
+        if(!user.isNotEmpty()) return "redirect:/v1/todo/person/register?err";
 
-        String page = authService.registration(RegistrationDto
-                .builder()
-                .firstname(first_name)
-                .lastname(last_name)
-                .email(email_user)
-                .password(pass_user)
-                .build()
-        );
+        String page = authService.registration(user);
 
         return "redirect:" + page;
     }

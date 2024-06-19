@@ -22,7 +22,7 @@ import java.util.List;
 public class UserEntity implements UserDetails{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.PRIVATE)
     private Long id;
 
@@ -30,6 +30,8 @@ public class UserEntity implements UserDetails{
     private String firstname;
     @Getter
     private String lastname;
+    @Getter
+    private String login;
     private String email;
     private String password;
     private String token;

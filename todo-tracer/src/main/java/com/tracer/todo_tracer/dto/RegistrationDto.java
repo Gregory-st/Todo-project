@@ -1,12 +1,12 @@
 package com.tracer.todo_tracer.dto;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class RegistrationDto {
 
     private String firstname;
@@ -14,11 +14,4 @@ public class RegistrationDto {
     private String login;
     private String email;
     private String password;
-
-    public Boolean isNotEmpty(){
-        return !firstname.isEmpty() &&
-               !lastname.isEmpty() &&
-               !email.isEmpty() &&
-               !password.isEmpty();
-    }
 }

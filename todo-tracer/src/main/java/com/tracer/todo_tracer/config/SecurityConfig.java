@@ -32,11 +32,6 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET,"/v1/todo/**").permitAll()
                                 .anyRequest().authenticated()
                 )
-
-                .exceptionHandling(exception -> exception.authenticationEntryPoint((request, response, authException) -> {
-                    response.setStatus(400);
-                    response.sendRedirect(request.getRequestURI() + "?err");
-                }))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

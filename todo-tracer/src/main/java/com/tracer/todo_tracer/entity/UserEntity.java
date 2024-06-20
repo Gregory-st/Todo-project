@@ -34,6 +34,7 @@ public class UserEntity implements UserDetails{
     private String login;
     private String email;
     private String password;
+    @Getter
     private String token;
 
     @Getter

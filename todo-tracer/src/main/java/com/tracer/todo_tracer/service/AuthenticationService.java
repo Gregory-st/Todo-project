@@ -20,7 +20,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager manager;
 
-    public String registration(RegistrationDto regDto){
+    public void registration(RegistrationDto regDto){
         UserEntity user = UserEntity
                 .builder()
                 .firstname(regDto.getFirstname())
@@ -33,11 +33,14 @@ public class AuthenticationService {
         user.setToken(jwtService.generateToken(user));
 
         userRepository.save(user);
-
-        return "/v1/todo/person/auth";
     }
 
     public UserEntity authentication(AuthenticationDto authDto){
+
+        if(!authDto.getEmail().contains("@")){
+            UserEntity userEntity = userRepository.findByLogin(authDto.getEmail()).orElseThrow();
+            authDto.setEmail(userEntity.getUsername());
+        }
 
         manager.authenticate(
           new UsernamePasswordAuthenticationToken(
@@ -54,5 +57,11 @@ public class AuthenticationService {
         userRepository.save(user);
 
         return user;
+    }
+
+    public UserEntity getUserByLogin(String login){
+        return userRepository
+                .findByLogin(login)
+                .orElseThrow();
     }
 }

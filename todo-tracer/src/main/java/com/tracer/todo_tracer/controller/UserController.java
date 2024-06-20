@@ -1,6 +1,9 @@
 package com.tracer.todo_tracer.controller;
 
 import com.tracer.todo_tracer.entity.UserEntity;
+import com.tracer.todo_tracer.response.BaseSuccessResponse;
+import com.tracer.todo_tracer.response.RedirectResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import com.tracer.todo_tracer.dto.AuthenticationDto;
 import com.tracer.todo_tracer.dto.RegistrationDto;
@@ -8,6 +11,7 @@ import com.tracer.todo_tracer.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 
 @Controller
 @RequestMapping("/v1/todo/person")
@@ -22,15 +26,22 @@ public class UserController {
     }
 
     @PostMapping("/auth")
-    public String authUser(
-            @ModelAttribute AuthenticationDto user,
-            Model model
-    ){
+    public ResponseEntity<RedirectResponse> authUser(@RequestBody AuthenticationDto authed){
 
-        model.addAttribute("user", user);
-        UserEntity userEntity = authService.authentication(user);
+        RedirectResponse response = new RedirectResponse();
+        try{
+            UserEntity userEntity = authService.authentication(authed);
+            response.setSuccess(true);
+            response.setStatusCode(1);
+            response.setRedirectPath("/v1/todo/" + userEntity.getLogin());
+        }
+        catch (Exception e){
+            response.setSuccess(false);
+            response.setStatusCode(0);
+            response.setRedirectPath("/v1/todo/person/auth");
+        }
 
-        return "redirect:/v1/todo/" + userEntity.getLogin();
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/register")
@@ -39,15 +50,15 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String regUser(
-            @ModelAttribute RegistrationDto user,
-            Model model
-    ){
-        model.addAttribute("user", user);
-        if(!user.isNotEmpty()) return "redirect:/v1/todo/person/register?err";
+    public ResponseEntity<RedirectResponse> regUser(@RequestBody RegistrationDto user){
 
-        String page = authService.registration(user);
+        authService.registration(user);
+        RedirectResponse response = new RedirectResponse();
 
-        return "redirect:" + page;
+        response.setStatusCode(1);
+        response.setSuccess(true);
+        response.setRedirectPath("/v1/todo/person/auth");
+
+        return ResponseEntity.ok(response);
     }
 }

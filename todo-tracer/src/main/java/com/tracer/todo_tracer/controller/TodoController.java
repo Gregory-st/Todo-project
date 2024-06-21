@@ -1,50 +1,52 @@
 package com.tracer.todo_tracer.controller;
 
 import ch.qos.logback.core.model.Model;
-import com.tracer.todo_tracer.exception.ExceptionConvertPriority;
 import com.tracer.todo_tracer.dto.TodoModelDto;
-import com.tracer.todo_tracer.priority.TodoPriority;
+import com.tracer.todo_tracer.response.RedirectResponse;
 import com.tracer.todo_tracer.service.TodoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/v1/todo")
+@RequiredArgsConstructor
 public class TodoController {
 
-    @Autowired
-    private TodoService todoService;
+    private final TodoService todoService;
 
-    @GetMapping("/createTodo")
+    @GetMapping("/{login}/createTodo")
     public String createTodo(Model model){
         return "web/createTodo";
     }
 
-    @PostMapping("/createTodo")
-    public String createTodoPost(
-            @RequestParam String task_title,
-            @RequestParam String task_description,
-            @RequestParam String task_due_date,
-            @RequestParam String task_priority,
+    @PostMapping("/{login}/createTodo")
+    public ResponseEntity<RedirectResponse> createTodoPost(
+            @RequestBody TodoModelDto todo,
+            @PathVariable String login,
             Model model
     ){
 
+        RedirectResponse response = new RedirectResponse();
         try {
-            TodoModelDto addTodoModel = TodoModelDto
-                    .builder()
-                    .title(task_title)
-                    .description(task_description)
-                    .dateExpiration(task_due_date)
-                    .priority(TodoPriority.convert(task_priority))
-                    .build();
-
-            todoService.addTodo(addTodoModel);
+            todoService.addTodo(todo, login);
+            response.setStatusCode(1);
+            response.setSuccess(true);
+            response.setRedirectPath("/v1/todo/" + login);
         }
-        catch (ExceptionConvertPriority e){
-            return "/createTodo";
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            response.setSuccess(false);
+            response.setStatusCode(0);
+            response.setRedirectPath("/v1/todo/" + login + "/createTodo");
+            return ResponseEntity.badRequest().body(response);
         }
 
-        return "redirect:/v1/todo";
+        return ResponseEntity.ok(response);
     }
 }

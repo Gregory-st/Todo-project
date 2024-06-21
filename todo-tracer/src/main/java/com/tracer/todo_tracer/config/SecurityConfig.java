@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         authManager -> authManager
                                 .requestMatchers(HttpMethod.POST, "/v1/todo/person/**").permitAll()
-                                .requestMatchers(HttpMethod.GET,"/v1/todo/**").permitAll()
+                                .requestMatchers("/v1/todo/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider)

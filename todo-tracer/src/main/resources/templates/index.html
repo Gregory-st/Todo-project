@@ -15,7 +15,7 @@
       <div class="logo">Ежедневник</div>
       <ul>
         <li><a href="#">Главная</a></li>
-        <li><a href="./todo/createTodo">Создать задачу</a></li>
+        <li><a th:attr="href=@{${url}}">Создать задачу</a></li>
         <li><a href="./todo/setting">Настройки</a></li>
       </ul>
       <a href="./todo/person/auth" class="profile-btn">
@@ -65,7 +65,7 @@
   </main>
 
   <div class="tasks-list">
-    <!-- Здесь будут задачи -->
+
   </div>
 
   <footer>

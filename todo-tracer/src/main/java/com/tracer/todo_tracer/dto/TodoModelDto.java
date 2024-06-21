@@ -1,15 +1,16 @@
 package com.tracer.todo_tracer.dto;
 
-import com.tracer.todo_tracer.priority.TodoPriority;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Builder
+@Setter
 @Getter
+@NoArgsConstructor
 public class TodoModelDto {
 
     private String title;
     private String description;
     private String dateExpiration;
-    private TodoPriority priority;
+    private String priority;
 }

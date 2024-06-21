@@ -1,7 +1,6 @@
 package com.tracer.todo_tracer.controller;
 
 import com.tracer.todo_tracer.entity.UserEntity;
-import com.tracer.todo_tracer.response.BaseSuccessResponse;
 import com.tracer.todo_tracer.response.RedirectResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -10,7 +9,10 @@ import com.tracer.todo_tracer.dto.RegistrationDto;
 import com.tracer.todo_tracer.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller

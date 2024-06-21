@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style th:replace="blocks/createTodoStyle :: styles"></style>
+  <style th:replace="blocks/public_style :: style"></style>
 </head>
 <body>
   <header>
@@ -54,5 +55,7 @@
         </form>
       </div>
   </main>
+
+  <script th:replace="scripts/createTodo_sc :: script"></script>
 </body>
 </html>

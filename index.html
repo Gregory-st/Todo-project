@@ -64,19 +64,33 @@
     </div>
   </main>
 
-  <div class="tasks-list">
-    <!-- Здесь будут задачи -->
-  </div>
+  <nav class="tasks-list">
+    <div class="task-container">
+      <h2>Задача</h2>
+      <form>
+        <div class="contain">
+
+          <div class="group">
+            <p>Параметр 1</p>
+            <p>Параметр 2</p>
+            <p>Параметр 3</p>
+          </div>
+
+          <div class="group">
+            <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, modi maxime odio adipisci molestias nesciunt totam ducimus quasi excepturi ipsa cupiditate necessitatibus, delectus nostrum libero, doloribus soluta! Esse aut provident maiores. Cumque, blanditiis. Nostrum hic saepe aliquam numquam veritatis voluptate, facilis vero quod possimus deserunt, excepturi temporibus totam at ab obcaecati quos exercitationem inventore, expedita repellendus suscipit autem quia necessitatibus.</p>
+          </div>
+        </div>
+
+        <nav class="button-content">
+          <button type="submit" class="submit-done">Завершить</button>
+        </nav>
+      </form>
+      </div>
+    </div>
+  </nav>
 
   <footer>
     <p>&copy; 2024 Ежедневник. Все права защищены.</p>
   </footer>
-
-  <script>
-      document.querySelector('.main-btn').addEventListener('click', function() {
-      this.classList.toggle('show');
-      document.querySelector('.social-buttons').classList.toggle('show');
-  });
-  </script>
 </body>
 </html>

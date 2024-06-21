@@ -92,7 +92,7 @@ body {
     align-items: center;
     margin: 1.5rem;
   }
-  
+
   .calendar-header button,
   .tasks-header button {
     background-color: #4CAF50;
@@ -109,8 +109,8 @@ body {
   }
   
   .tasks-list {
-    max-height: 300px;
-    overflow-y: auto;
+    margin: 2rem auto;
+    padding: 2rem;
   }
   
   .sidebar {
@@ -134,4 +134,58 @@ body {
       flex-direction: column;
     }
   }
-  
+
+  .task-container{
+    max-width: 1200px;
+    min-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+  }
+
+  .contain{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .group{
+    margin: 1rem;
+  }
+
+  .group p{
+    overflow: auto;
+      padding: 15px 30px;
+      margin: 30px auto;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .description{
+    text-wrap: wrap;
+    max-width: 500px;
+    height: 210px;
+  }
+
+  .button-content{
+    justify-content: end;
+    margin: auto 15px;
+  }
+
+  .submit-done{
+    font-size: 1rem;
+    border: none;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+
+  .submit-done:hover{
+    transform: scale(1.05);
+    background-color: rgba(106, 172, 108, 0.9);;
+  }

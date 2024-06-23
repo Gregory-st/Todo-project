@@ -36,6 +36,7 @@ public class UserController {
             response.setSuccess(true);
             response.setStatusCode(1);
             response.setRedirectPath("/v1/todo/" + userEntity.getLogin());
+            response.setToken(userEntity.getToken());
         }
         catch (Exception e){
             response.setSuccess(false);

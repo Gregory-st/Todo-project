@@ -36,6 +36,7 @@
             "dateExpiration":controllers[2].value,
             "priority": controllers[3].value.toUpperCase()
         };
+        const jwt = sessionStorage.getItem('jwt');
 
         fetch(url, {
 
@@ -43,6 +44,7 @@
 
             headers: {
 
+                'Authorization': `Bearer ${jwt}`,
                 'Content-Type': 'application/json'
 
             },

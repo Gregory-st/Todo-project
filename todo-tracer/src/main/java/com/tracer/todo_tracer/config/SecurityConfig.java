@@ -28,9 +28,13 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         authManager -> authManager
-                                .requestMatchers(HttpMethod.POST, "/v1/todo/person/**").permitAll()
-                                .requestMatchers("/v1/todo/**").permitAll()
+                                .requestMatchers("/v1/todo/person/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/v1/todo/**").permitAll()
                                 .anyRequest().authenticated()
+                )
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(((request, response, authException) -> {
+                    response.sendRedirect("/v1/todo/person/auth");
+                }))
                 )
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

@@ -18,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Setter
+@Getter
 @Table(name = "user_entity")
 public class UserEntity implements UserDetails{
 
@@ -26,18 +27,13 @@ public class UserEntity implements UserDetails{
     @Setter(AccessLevel.PRIVATE)
     private Long id;
 
-    @Getter
     private String firstname;
-    @Getter
     private String lastname;
-    @Getter
     private String login;
     private String email;
     private String password;
-    @Getter
     private String token;
 
-    @Getter
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<TodoEntity> todos;
 

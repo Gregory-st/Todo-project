@@ -64,12 +64,36 @@
     </div>
   </main>
 
-  <div class="tasks-list">
+  <nav class="tasks-list">
+    <div class="task-container" th:each="task : ${tasks}">
+      <h2 th:text="${task.title}"></h2>
+      <p class="id" th:text="${task.id}"></p>
+      <form class="abs">
+        <div class="contain">
 
-  </div>
+          <div class="group">
+            <p class="params" th:text="${task.createAt}"></p>
+            <p class="params" th:text="${task.completed}"></p>
+          </div>
+
+          <div class="group">
+            <p class="description" th:text="${task.description}"></p>
+          </div>
+        </div>
+
+        <nav class="button-content">
+          <button type="submit" class="submit-done">Завершить</button>
+        </nav>
+      </form>
+      </div>
+    </div>
+  </nav>
+
 
   <footer>
     <p>&copy; 2024 Ежедневник. Все права защищены.</p>
   </footer>
+
+  <script th:replace="scripts/index_sc :: script"></script>
 </body>
 </html>

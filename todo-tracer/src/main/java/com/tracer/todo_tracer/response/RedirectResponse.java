@@ -9,4 +9,5 @@ import lombok.*;
 public class RedirectResponse extends BaseSuccessResponse {
 
     private String redirectPath;
+    private String token;
 }

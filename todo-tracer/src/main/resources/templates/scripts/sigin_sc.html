@@ -15,8 +15,13 @@
 
             let valid = passwordInput.value.length > 0 && emailInput.value.length > 0;
 
-            if(valid){
-
+            if(!valid){
+                emailInput.classList.add("error");
+                emailInput.classList.add("shake");
+                passwordInput.classList.add("error");
+                passwordInput.classList.add("shake");
+                return;
+            }
                 fetch('http://localhost:8080/v1/todo/person/auth', {
 
                     method: 'POST',
@@ -41,23 +46,14 @@
                             window.location.href = data.redirectPath + "?err";
                             return;
                         }
-                        window.location.href = data.redirectPath;
+
+                    sessionStorage.setItem("jwt", data.token);
+                    window.location.href=data.redirectPath;
+
+                    console.log(urlRedirect.toString());
                     })
 
                     .catch(error => console.log(error));
-
-                return;
-            }
-
-            if(emailInput.value.length == 0){
-                emailInput.classList.add("error");
-                emailInput.classList.add("shake");
-            }
-
-            if(passwordInput.value.length == 0){
-                passwordInput.classList.add("error");
-                passwordInput.classList.add("shake");
-            }
 
         })
     });

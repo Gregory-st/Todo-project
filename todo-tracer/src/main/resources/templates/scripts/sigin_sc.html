@@ -47,7 +47,7 @@
                             return;
                         }
 
-                    sessionStorage.setItem("jwt", data.token);
+                    localStorage.setItem("jwt", data.token);
                     window.location.href=data.redirectPath;
 
                     console.log(urlRedirect.toString());

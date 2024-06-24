@@ -3,7 +3,6 @@ package com.tracer.todo_tracer.model;
 import com.tracer.todo_tracer.entity.TodoEntity;
 import com.tracer.todo_tracer.priority.TodoPriority;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
@@ -16,11 +15,14 @@ public class TodoModel {
     private String completed;
     private String createAt;
     private TodoPriority priority;
+    private Boolean state;
 
     public TodoModel(TodoEntity todoEntity) {
         this.id = todoEntity.getId();
         this.title = todoEntity.getTitle();
         this.description = todoEntity.getDescription();
+
+        this.state = todoEntity.getStatus();
 
         if(todoEntity.getStatus())
             completed = "Завершенно";
@@ -28,6 +30,14 @@ public class TodoModel {
             completed = "Выполняется";
 
         this.priority = todoEntity.getTodoPriority();
-        this.createAt = todoEntity.getCreateAt().replace('-', '.');
+        String[] subLine = todoEntity
+                .getCreateAt()
+                .split("-");
+
+        this.createAt = subLine[2] +
+                "." +
+                subLine[1] +
+                "." +
+                subLine[0];
     }
 }

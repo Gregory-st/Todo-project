@@ -64,4 +64,11 @@ public class AuthenticationService {
                 .findByLogin(login)
                 .orElseThrow();
     }
+
+
+    public boolean isExpired(String login) {
+
+        UserEntity userEntity = userRepository.findByLogin(login).orElseThrow();
+        return jwtService.isTokenExpired(userEntity.getToken());
+    }
 }

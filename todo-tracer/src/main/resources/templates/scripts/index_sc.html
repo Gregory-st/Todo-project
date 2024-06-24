@@ -1,44 +1,88 @@
 <script th:fragment="script">
-    document.addEventListener("DOMContentLoaded", () =>{
+    function onClick(event, x){
+        event.preventDefault();
 
-    document
-    .querySelectorAll(".submit-done")
-    .forEach(x => {
-        x.addEventListener("click", event => {
-            event.preventDefault();
+        const parentControl = x
+        .parentNode
+        .parentNode
+        .parentNode
+        .querySelector(".id");
 
-            const parantControll = x
+        const url = window.location.href;
+        const state = {
+            "id": parseInt(parentControl.textContent),
+            "status": true
+        };
+
+        const jwt = localStorage.getItem('jwt');
+
+        fetch(url, {
+
+            method: 'PUT',
+
+            headers: {
+
+                'Authorization': `Bearer ${jwt}`,
+                'Content-Type': 'application/json'
+
+            },
+
+            body: JSON.stringify(state)
+
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(!data.success) return;
+            location.reload();
+        })
+        .catch(error => Console.log(error));
+
+    }
+
+    function(event, btn){
+        event.preventDefault();
+        const parentControl = btn
             .parentNode
             .parentNode
             .parentNode
             .querySelector(".id");
 
-            const url = window.location.href;
-            const data = {
-                "id": parseInt(parantControll.textContent),
-                "status": true
-            };
+        const url = window.location.href + "/" + parentControl.textContent;
 
-            const jwt = sessionStorage.getItem('jwt');
+    }
 
-            fetch(url, {
 
-                method: 'PUT',
+function onDelete(event, btn){
+    event.preventDefault();
 
-                headers: {
+    const parentControl = btn
+        .parentNode
+        .parentNode
+        .parentNode
+        .querySelector(".id");
 
-                    'Authorization': `Bearer ${jwt}`,
-                    'Content-Type': 'application/json'
+    const url = window.location.href + "/" + parentControl.textContent;
 
-                },
+    fetch(url, {
+        method = "DELETE"
+    })
+    .then(response => response.json())
+    .then(resp => console.log(resp));
+}
 
-                body: JSON.stringify(data)
 
-            })
-                .then(response => response.json())
-                .then(data => window.location.reload())
-                .catch(error => console.log(error));
+    document.addEventListener("DOMContentLoaded", () =>{
+
+        document
+        .querySelectorAll(".submit-done")
+        .forEach(x => {
+            x.addEventListener("click", event => onClick(event, x));
+        });
+
+        document
+        .querySelectorAll(".delete-btn")
+        .forEach(x => {
+            x.addEventListener("click", event => onDelete(event, x));
         });
     });
-});
 </script>

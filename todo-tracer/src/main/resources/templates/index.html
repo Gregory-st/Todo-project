@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style th:replace="blocks/indexstyle :: styles"></style>
+  <style th:replace="blocks/public_style :: style"></style>
 </head>
 <body>
   <header>
@@ -65,10 +66,10 @@
   </main>
 
   <nav class="tasks-list">
-    <div class="task-container" th:each="task : ${tasks}">
+    <div class="task-container" th:each="task : ${tasks}" th:classappend="${task.state} ? 'complitetodo' : 'waittodo'">
       <h2 th:text="${task.title}"></h2>
       <p class="id" th:text="${task.id}"></p>
-      <form class="abs">
+      <form class="abs" method="post">
         <div class="contain">
 
           <div class="group">
@@ -82,7 +83,8 @@
         </div>
 
         <nav class="button-content">
-          <button type="submit" class="submit-done">Завершить</button>
+          <button th:if="${!task.state}" type="submit" class="submit-done btn">Завершить</button>
+          <button th:if="${task.state}" type="submit" class="delete-btn btn">Удалить</button>
         </nav>
       </form>
       </div>

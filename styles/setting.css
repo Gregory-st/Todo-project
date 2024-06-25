@@ -91,8 +91,10 @@ nav ul li a {
     color: black;
     font-weight: normal;
     text-decoration: none;
+    text-wrap: wrap;
+    min-width: 300px;
     font-size: 1rem;
-    box-shadow: 0 0px 15px #4CAF50;
+    box-shadow: 0 8px 12px #4caf4fa9;
 }
 
 .hlink:hover {
@@ -100,17 +102,42 @@ nav ul li a {
     box-shadow: 0 0px 15px #4caf4f63;
 }
 
+.password{
+    width: 96%;
+    
+}
+
 .active{
+    overflow-x: auto;
+    border: transparent;
     margin: 20px 10px;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
+.active::-webkit-scrollbar-thumb{
+    background-color: antiquewhite;
+    border-radius: 10px;
+}
+
+.active::-webkit-scrollbar-track{
+    border-radius: 10px;
+}
+
+.active::-webkit-scrollbar{
+    background-color: #419639;
+}
+
 .active:hover{
     background-color: #419639;
     color: rgb(255, 255, 255);
     transform: scale(1.02);
+}
+
+.btn-content{
+    display: flex;
+    justify-content: space-around;
 }
 
 .beforb{
@@ -120,6 +147,18 @@ nav ul li a {
     padding: 10px;
     border-radius: 5px;
     background-color: #419639;
+    color: white;
+    font-weight: bold;
+    border-color: transparent;
+}
+
+.logout{
+    font-size: 1rem;
+    min-width: 50%;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #963939;
     color: white;
     font-weight: bold;
     border-color: transparent;

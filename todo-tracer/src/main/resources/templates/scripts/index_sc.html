@@ -39,18 +39,6 @@
 
     }
 
-    function(event, btn){
-        event.preventDefault();
-        const parentControl = btn
-            .parentNode
-            .parentNode
-            .parentNode
-            .querySelector(".id");
-
-        const url = window.location.href + "/" + parentControl.textContent;
-
-    }
-
 
 function onDelete(event, btn){
     event.preventDefault();
@@ -62,12 +50,19 @@ function onDelete(event, btn){
         .querySelector(".id");
 
     const url = window.location.href + "/" + parentControl.textContent;
+    const jwt = localStorage.getItem("jwt");
 
     fetch(url, {
-        method = "DELETE"
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${jwt}`
+        }
     })
     .then(response => response.json())
-    .then(resp => console.log(resp));
+    .then(resp =>{
+        if(!resp.success) return;
+        location.reload();
+    });
 }
 
 

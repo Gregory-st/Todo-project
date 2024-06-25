@@ -93,7 +93,9 @@ nav ul li a {
     font-weight: normal;
     text-decoration: none;
     font-size: 1rem;
-    box-shadow: 0 0px 15px #4CAF50;
+    text-wrap: wrap;
+    min-width: 100px;
+    box-shadow: 0 8px 12px #4caf4fa9;
 }
 
 .hlink:hover {
@@ -102,16 +104,29 @@ nav ul li a {
 }
 
 .active{
+    border: transparent;
+    width: 96%;
+    overflow-x: auto;
     margin: 20px 10px;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.active:hover{
+.active::-webkit-scrollbar-thumb{
     background-color: #419639;
-    color: rgb(255, 255, 255);
-    transform: scale(1.02);
+    border-radius: 10px;
+}
+
+.active::-webkit-scrollbar{
+    height: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.btn-content{
+    display: flex;
+    justify-content: space-around;
 }
 
 .beforb{
@@ -125,6 +140,23 @@ nav ul li a {
     font-weight: bold;
     border-color: transparent;
 }
+
+.logout{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1rem;
+    min-width: 50%;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #963939;
+    color: white;
+    font-weight: bold;
+    border-color: transparent;
+}
+
 
 .transformhover:hover{
     transform: scale(1.05);

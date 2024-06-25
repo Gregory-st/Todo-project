@@ -3,6 +3,7 @@ package com.tracer.todo_tracer.service;
 import com.tracer.todo_tracer.dto.AuthenticationDto;
 import com.tracer.todo_tracer.dto.RegistrationDto;
 import com.tracer.todo_tracer.entity.UserEntity;
+import com.tracer.todo_tracer.model.UserModel;
 import com.tracer.todo_tracer.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -59,9 +60,10 @@ public class AuthenticationService {
         return user;
     }
 
-    public UserEntity getUserByLogin(String login){
+    public UserModel getUserByLogin(String login){
         return userRepository
                 .findByLogin(login)
+                .map(UserModel::new)
                 .orElseThrow();
     }
 

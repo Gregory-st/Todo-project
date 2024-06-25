@@ -1,10 +1,12 @@
 package com.tracer.todo_tracer.service;
 
+import com.tracer.todo_tracer.comparator.TodoComparator;
 import com.tracer.todo_tracer.dto.StatusTodoDto;
 import com.tracer.todo_tracer.entity.TodoEntity;
 import com.tracer.todo_tracer.dto.TodoModelDto;
 import com.tracer.todo_tracer.entity.UserEntity;
 import com.tracer.todo_tracer.exception.ExceptionConvertPriority;
+import com.tracer.todo_tracer.exception.ExceptionNotFoundTodo;
 import com.tracer.todo_tracer.model.TodoModel;
 import com.tracer.todo_tracer.priority.TodoPriority;
 import com.tracer.todo_tracer.repository.TodoRepository;
@@ -48,6 +50,7 @@ public class TodoService {
                 .findByUser_Id(userEntity.getId())
                 .stream()
                 .map(TodoModel::new)
+                .sorted(new TodoComparator())
                 .toList();
     }
 
@@ -58,5 +61,14 @@ public class TodoService {
 
         todoEntity.setStatus(statusTodoDto.getStatus());
         todoRepository.save(todoEntity);
+    }
+
+    public void deleteTodoAt(Long id) throws ExceptionNotFoundTodo {
+
+        todoRepository
+                .findById(id)
+                .orElseThrow(ExceptionNotFoundTodo::new);
+
+        todoRepository.deleteById(id);
     }
 }

@@ -16,10 +16,10 @@
       <div class="logo">Ежедневник</div>
       <ul>
         <li><a href="#">Главная</a></li>
-        <li><a th:attr="href=@{${url}}">Создать задачу</a></li>
-        <li><a href="./todo/setting">Настройки</a></li>
+        <li><a th:attr="href=@{${urlCreate}}">Создать задачу</a></li>
+        <li><a th:attr="href=@{${urlSettings}}">Настройки</a></li>
       </ul>
-      <a href="./todo/person/auth" class="profile-btn">
+      <a th:attr="href=@{${urlSettings}}" class="profile-btn">
         <i class="icon-user"></i>
         Профиль
       </a>
@@ -45,10 +45,10 @@
       <div class="tasks">
         <div class="tasks-header">
           <h2>Задачи</h2>
-          <button class="add-task-btn">
+          <a class="add-task-btn" th:attr="href=@{${urlCreate}}">
             <i class="icon-plus"></i>
             Новая задача
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@
   </main>
 
   <nav class="tasks-list">
-    <div class="task-container" th:each="task : ${tasks}" th:classappend="${task.state} ? 'complitetodo' : 'waittodo'">
+    <div class="task-container" th:each="task : ${tasks}" th:classappend="${task.state}">
       <h2 th:text="${task.title}"></h2>
       <p class="id" th:text="${task.id}"></p>
       <form class="abs" method="post">
@@ -83,8 +83,8 @@
         </div>
 
         <nav class="button-content">
-          <button th:if="${!task.state}" type="submit" class="submit-done btn">Завершить</button>
-          <button th:if="${task.state}" type="submit" class="delete-btn btn">Удалить</button>
+          <button th:if="${!task.isComplete}" type="submit" class="submit-done btn">Завершить</button>
+          <button th:if="${task.isComplete}" type="submit" class="delete-btn btn">Удалить</button>
         </nav>
       </form>
       </div>

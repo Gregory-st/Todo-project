@@ -14,8 +14,7 @@
         <nav>
             <div class="logo">Ежедневник</div>
             <ul>
-                <li><a href="../todo">Главная</a></li>
-                <li><a href="#">Задачи</a></li>
+                <li><a href=".">Главная</a></li>
             </ul>
             <li>Настройки</li>
         </nav>
@@ -23,34 +22,25 @@
 
     <div class="holder">
         <a href="#person" class="hlink">Персональные данные</a>
-        <a href="#" class="hlink"></a>
-        <a href="#" class="hlink"></a>
     </div>
     <main>
         <div class="containers">
             <div class="container" id="person">
                 <nav>
-                    <div class="personinfo">
-                        <div class="firstname active">
-                            <p>Фамилия</p>
-                        </div>
-                        <div class="lastname active">
-                            <p>Имя</p>
-                        </div>
+                    <div class="personinfo" >
+                        <input type="text" name="firstname-user" class="firstname active" th:disabled="${enable}" th:value="${user.firstname}"/>
+                        <input type="text" name="lastname-user" class="lastname active" th:disabled="${enable}" th:value="${user.lastname}"/>
                     </div>
                     <img src="../examples/Profil1.png" alt="Фото профиля" class="userphoto">
                 </nav>
-                <div class="email active">
-                    <p>Почта</p>
-                </div>
-                <div class="password active">
-                    <p>Пароль</p>
-                </div>
+                <input type="email" name="email-user" class="email active" th:disabled="${enable}" th:value="${user.email}"/>
+                <input type="password" name="pass-new" id="pass-new" class="password active" th:disabled="${enable}"/>
 
-                <button class="beforb transformhover">Редактировать</button>
+                <div class="btn-content">
+                    <button class="beforb transformhover">Редактировать</button>
+                    <a class="logout transformhover" href="/v1/todo">Выйти</a>
+                </div>
             </div>
-            <div class="container" id=""></div>
-            <div class="container"></div>
         </div>
     </main>
 

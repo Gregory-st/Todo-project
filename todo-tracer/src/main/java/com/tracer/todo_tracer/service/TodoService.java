@@ -1,6 +1,6 @@
 package com.tracer.todo_tracer.service;
 
-import com.tracer.todo_tracer.comparator.TodoComparator;
+import com.tracer.todo_tracer.comparator.TodoComparatorPriority;
 import com.tracer.todo_tracer.dto.StatusTodoDto;
 import com.tracer.todo_tracer.entity.TodoEntity;
 import com.tracer.todo_tracer.dto.TodoModelDto;
@@ -50,7 +50,7 @@ public class TodoService {
                 .findByUser_Id(userEntity.getId())
                 .stream()
                 .map(TodoModel::new)
-                .sorted(new TodoComparator())
+                .sorted(new TodoComparatorPriority())
                 .toList();
     }
 

@@ -1,6 +1,7 @@
 package com.tracer.todo_tracer.controller;
 
 import com.tracer.todo_tracer.entity.UserEntity;
+import com.tracer.todo_tracer.exception.ExistUserWithByLoginException;
 import com.tracer.todo_tracer.response.RedirectResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -55,12 +56,22 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<RedirectResponse> regUser(@RequestBody RegistrationDto user){
 
-        authService.registration(user);
         RedirectResponse response = new RedirectResponse();
 
         response.setStatusCode(1);
         response.setSuccess(true);
         response.setRedirectPath("/v1/todo/person/auth");
+
+        try{
+            authService.registration(user);
+        }
+        catch (ExistUserWithByLoginException exception){
+            response.setSuccess(false);
+            response.setMessage(exception.getMessage());
+            response.setStatusCode(0);
+
+            return ResponseEntity.badRequest().body(response);
+        }
 
         return ResponseEntity.ok(response);
     }

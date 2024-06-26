@@ -1,9 +1,7 @@
 package com.tracer.todo_tracer.controller;
 
-import com.tracer.todo_tracer.comparator.TodoComparator;
 import com.tracer.todo_tracer.dto.StatusTodoDto;
 import com.tracer.todo_tracer.exception.ExceptionNotFoundTodo;
-import com.tracer.todo_tracer.model.TodoModel;
 import com.tracer.todo_tracer.response.BaseSuccessResponse;
 import com.tracer.todo_tracer.response.RedirectResponse;
 import com.tracer.todo_tracer.service.AuthenticationService;
@@ -13,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/v1/todo")

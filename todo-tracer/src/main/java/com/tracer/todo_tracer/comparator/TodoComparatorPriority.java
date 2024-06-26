@@ -4,7 +4,7 @@ import com.tracer.todo_tracer.model.TodoModel;
 
 import java.util.Comparator;
 
-public class TodoComparator implements Comparator<TodoModel> {
+public class TodoComparatorPriority implements Comparator<TodoModel> {
 
     @Override
     public int compare(TodoModel todo1, TodoModel todo2) {

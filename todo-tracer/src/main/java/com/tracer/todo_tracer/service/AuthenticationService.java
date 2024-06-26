@@ -1,8 +1,11 @@
 package com.tracer.todo_tracer.service;
 
 import com.tracer.todo_tracer.dto.AuthenticationDto;
+import com.tracer.todo_tracer.dto.PasswordDto;
 import com.tracer.todo_tracer.dto.RegistrationDto;
 import com.tracer.todo_tracer.entity.UserEntity;
+import com.tracer.todo_tracer.exception.ExceptionConvertPriority;
+import com.tracer.todo_tracer.exception.ExistUserWithByLoginException;
 import com.tracer.todo_tracer.model.UserModel;
 import com.tracer.todo_tracer.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +24,16 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager manager;
 
-    public void registration(RegistrationDto regDto){
+    public void registration(RegistrationDto regDto) throws ExistUserWithByLoginException {
+
+        boolean isExist = userRepository
+                .findByLogin(regDto.getLogin())
+                .isPresent();
+
+        if(isExist){
+            throw new ExistUserWithByLoginException();
+        }
+
         UserEntity user = UserEntity
                 .builder()
                 .firstname(regDto.getFirstname())
@@ -40,7 +52,8 @@ public class AuthenticationService {
 
         if(!authDto.getEmail().contains("@")){
             UserEntity userEntity = userRepository.findByLogin(authDto.getEmail()).orElseThrow();
-            authDto.setEmail(userEntity.getUsername());
+            System.out.println(userEntity.getEmail());
+            authDto.setEmail(userEntity.getEmail());
         }
 
         manager.authenticate(
@@ -60,6 +73,35 @@ public class AuthenticationService {
         return user;
     }
 
+    public UserEntity updateUserData(String login, RegistrationDto user){
+
+        UserEntity entity = userRepository
+                .findByLogin(login)
+                .orElseThrow();
+
+        entity.setFirstname(user.getFirstname());
+        entity.setLastname(user.getLastname());
+        entity.setEmail(user.getEmail());
+        entity.setLogin(user.getLogin());
+        entity.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        entity.setToken(jwtService.generateToken(entity));
+
+        userRepository.save(entity);
+
+        return entity;
+    }
+
+    public void logout(String login){
+        UserEntity entity = userRepository
+                .findByLogin(login)
+                .orElseThrow();
+
+        entity.setToken("");
+
+        userRepository.save(entity);
+    }
+
     public UserModel getUserByLogin(String login){
         return userRepository
                 .findByLogin(login)
@@ -72,5 +114,14 @@ public class AuthenticationService {
 
         UserEntity userEntity = userRepository.findByLogin(login).orElseThrow();
         return jwtService.isTokenExpired(userEntity.getToken());
+    }
+
+    public boolean isEquals(String login, PasswordDto passwordDto){
+        String password = userRepository
+                .findByLogin(login)
+                .orElseThrow()
+                .getPassword();
+
+        return passwordEncoder.matches(passwordDto.getPassword(), password);
     }
 }

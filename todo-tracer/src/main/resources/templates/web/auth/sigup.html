@@ -16,8 +16,6 @@
             <div class="logo">Ежедневник</div>
             <ul>
                 <li><a href="../../todo">Главная</a></li>
-                <li><a href="#">Задачи</a></li>
-                <li><a href="../../todo/setting">Настройки</a></li>
             </ul>
             <li>Регистрация</li>
         </nav>
@@ -26,7 +24,7 @@
     <main>
         <div class="create-user-container">
             <h1>Регистрация</h1>
-            <h3 class="except" th:if="${param.err}">Не все поля были заполнены</h3>
+            <h3 class="except"></h3>
             <form class="create-user-form">
                 <div class="from-group">
                     <label for="first-name">Имя</label>
@@ -51,7 +49,10 @@
                 </div>
 
                 <div class="from-group">
-                    <button type="submit" class="submit-reg">Регистрация</button>
+                    <nav class="content-button">
+                        <button type="submit" class="submit-reg btn">Регистрация</button>
+                        <a href="./auth" class="auth btn">Авторизация</a>
+                    </nav>
                 </div>
             </form>
         </div>

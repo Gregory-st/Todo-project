@@ -10,6 +10,7 @@ public class UserModel {
 
     private String firstname;
     private String lastname;
+    private String login;
     private String email;
 
     public UserModel(UserEntity userEntity) {
@@ -17,5 +18,6 @@ public class UserModel {
         this.firstname = userEntity.getFirstname();
         this.lastname = userEntity.getLastname();
         this.email = userEntity.getEmail();
+        this.login = userEntity.getLogin();
     }
 }

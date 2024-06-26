@@ -51,7 +51,14 @@
             .then(response => response.json())
 
             .then(data => {
-                window.location.href = data.redirectPath;
+                if(!data.success){
+                    document.querySelector(".except").textContent = data.message;
+                    controlls[2].classList.add("error");
+                    controlls[2].classList.add("shake");
+                }
+                else{
+                    window.location.href = data.redirectPath;
+                }
             })
 
             .catch(error => console.log(error));

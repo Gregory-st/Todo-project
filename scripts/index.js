@@ -65,4 +65,15 @@ document.addEventListener("DOMContentLoaded", () =>{
     .forEach(x => {
         x.addEventListener("click", event => onClick(event, x));
     });
+
+    const today = new Date();
+    const options = {
+        day:'numeric',
+        month:'long',
+        year:'numeric'
+    };
+    const formatter = new Intl.DateTimeFormat('ru-Ru', options);
+    const formattedDate = formatter.format(today);
+
+    document.querySelector()
 });

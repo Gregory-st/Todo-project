@@ -68,6 +68,17 @@ function onDelete(event, btn){
 
     document.addEventListener("DOMContentLoaded", () =>{
 
+        const today = new Date();
+        const options = {
+            day:'numeric',
+            month:'long',
+            year:'numeric'
+        };
+        const formatter = new Intl.DateTimeFormat('ru-Ru', options);
+        const formattedDate = formatter.format(today);
+
+        document.querySelector(".current-month").textContent = formattedDate;
+
         if(localStorage.getItem('selectSort') === null){
             localStorage.setItem('selectSort', 'priority');
         }
@@ -109,15 +120,5 @@ function onDelete(event, btn){
 
     });
 
-        const today = new Date();
-        const options = {
-            day:'numeric',
-            month:'long',
-            year:'numeric'
-        };
-        const formatter = new Intl.DateTimeFormat('ru-Ru', options);
-        const formattedDate = formatter.format(today);
-
-        document.querySelector(".current-month").textContent = formattedDate;
     });
 </script>

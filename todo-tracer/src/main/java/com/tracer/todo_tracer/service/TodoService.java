@@ -47,8 +47,7 @@ public class TodoService {
     public List<TodoModel> getTodos(String login, Comparator<TodoModel> comparator){
 
         UserEntity userEntity = userRepository.findByLogin(login).orElseThrow();
-        return todoRepository
-                .findByUser_Id(userEntity.getId())
+        return userEntity.getTodos()
                 .stream()
                 .map(TodoModel::new)
                 .sorted(comparator)

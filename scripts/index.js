@@ -60,10 +60,34 @@ function(event, btn){
 
 document.addEventListener("DOMContentLoaded", () =>{
 
+    const sorter = document.getElementById("sort-patter");
+    sorter.value = localStorage.getItem('selectSort');
+
     document
     .querySelectorAll(".submit-done")
     .forEach(x => {
         x.addEventListener("click", event => onClick(event, x));
+    });
+
+    sorter.addEventListener('change', (event) => {
+
+        const changeValue = event.target.value;
+        const urlPatch = window.location.href + `/${changeValue}`;
+        const jwt = localStorage.getItem('jwt');
+
+        fetch(urlPatch, {
+            method:'PATCH',
+            headers:{
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+            .then(response => response.json())
+            .then(resp => {
+                localStorage.setItem('selectSort', changeValue);
+                location.reload();
+            })
+            .catch(error => console.log(error));
+
     });
 
     const today = new Date();
@@ -75,5 +99,5 @@ document.addEventListener("DOMContentLoaded", () =>{
     const formatter = new Intl.DateTimeFormat('ru-Ru', options);
     const formattedDate = formatter.format(today);
 
-    document.querySelector()
+    document.querySelector(".current-month").textContent = formattedDate;
 });

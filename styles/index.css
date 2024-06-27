@@ -189,3 +189,12 @@ body {
     transform: scale(1.05);
     background-color: rgba(106, 172, 108, 0.9);;
   }
+
+  #sort-patter{
+    width: 100%;
+    margin: 5px auto;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }

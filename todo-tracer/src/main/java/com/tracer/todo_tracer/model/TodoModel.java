@@ -18,6 +18,7 @@ public class TodoModel {
     private String description;
     private String completed;
     private String createAt;
+    private String sqlDateCreate;
     private TodoPriority priority;
     private TodoState state;
 
@@ -25,6 +26,7 @@ public class TodoModel {
         this.id = todoEntity.getId();
         this.title = todoEntity.getTitle();
         this.description = todoEntity.getDescription();
+        this.sqlDateCreate = todoEntity.getCreateAt();
 
         if(todoEntity.getStatus())
             completed = "Завершенно";
@@ -53,6 +55,7 @@ public class TodoModel {
 
             if(expired.isBefore(today)){
                 this.state = TodoState.FAILED;
+                completed = "Проваленно";
             }
             else {
                 this.state = TodoState.WAITED;
@@ -66,5 +69,9 @@ public class TodoModel {
 
     public Boolean isComplete(){
         return state != TodoState.WAITED;
+    }
+
+    public String getNamePriority(){
+        return priority.toString();
     }
 }

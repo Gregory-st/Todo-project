@@ -68,6 +68,13 @@ function onDelete(event, btn){
 
     document.addEventListener("DOMContentLoaded", () =>{
 
+        if(localStorage.getItem('selectSort') === null){
+            localStorage.setItem('selectSort', 'priority');
+        }
+
+        const sorter = document.getElementById("sort-patter");
+        sorter.value = localStorage.getItem('selectSort');
+
         document
         .querySelectorAll(".submit-done")
         .forEach(x => {
@@ -79,6 +86,29 @@ function onDelete(event, btn){
         .forEach(x => {
             x.addEventListener("click", event => onDelete(event, x));
         });
+
+
+    sorter.addEventListener('change', (event) => {
+
+        const changeValue = event.target.value;
+        const urlPatch = window.location.href + `/${changeValue}`;
+        const jwt = localStorage.getItem('jwt');
+
+        fetch(urlPatch, {
+            method:'PATCH',
+            headers:{
+                'Authorization': `Bearer ${jwt}`
+            }
+        })
+            .then(response => response.json())
+            .then(resp => {
+                localStorage.setItem('selectSort', changeValue);
+                location.reload();
+            })
+            .catch(error => console.log(error));
+
+    });
+
         const today = new Date();
         const options = {
             day:'numeric',

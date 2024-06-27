@@ -14,6 +14,7 @@ import com.tracer.todo_tracer.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -43,14 +44,14 @@ public class TodoService {
         todoRepository.save(todoEntity);
     }
 
-    public List<TodoModel> getTodos(String login){
+    public List<TodoModel> getTodos(String login, Comparator<TodoModel> comparator){
 
         UserEntity userEntity = userRepository.findByLogin(login).orElseThrow();
         return todoRepository
                 .findByUser_Id(userEntity.getId())
                 .stream()
                 .map(TodoModel::new)
-                .sorted(new TodoComparatorPriority())
+                .sorted(comparator)
                 .toList();
     }
 

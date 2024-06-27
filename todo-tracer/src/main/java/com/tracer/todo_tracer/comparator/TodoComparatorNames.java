@@ -1,13 +1,13 @@
 package com.tracer.todo_tracer.comparator;
 
-import com.tracer.todo_tracer.entity.TodoEntity;
+import com.tracer.todo_tracer.model.TodoModel;
 
 import java.util.Comparator;
 
-public class TodoComparatorNames implements Comparator<TodoEntity> {
+public class TodoComparatorNames implements Comparator<TodoModel> {
 
     @Override
-    public int compare(TodoEntity entity1, TodoEntity entity2) {
+    public int compare(TodoModel entity1, TodoModel entity2) {
         return entity1.getTitle().compareTo(entity2.getTitle());
     }
 }

@@ -30,6 +30,7 @@ public class SecurityConfig {
                         authManager -> authManager
                                 .requestMatchers("/v1/todo/person/**").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/v1/todo/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/images/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(((request, response, authException) -> {

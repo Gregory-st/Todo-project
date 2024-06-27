@@ -20,4 +20,15 @@ public enum TodoPriority {
             default -> throw new ExceptionConvertPriority();
         };
     }
+
+
+    @Override
+    public String toString() {
+        String[] names = new String[]{
+                "Низкий",
+                "Средний",
+                "Высокий"
+        };
+        return names[impotent - 1];
+    }
 }

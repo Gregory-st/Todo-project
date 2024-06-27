@@ -120,6 +120,7 @@
                 if(!resp.success) return;
 
                 localStorage.setItem('jwt', resp.token);
+                localStorage.setItem('selectSort', 'priority');
                 window.location.href = resp.redirectPath;
             })
             .catch(error => console.log(error));

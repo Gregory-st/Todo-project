@@ -60,7 +60,11 @@
       </div>
       <h3>Сортировка</h3>
       <div class="sorting">
-        <!-- Здесь будет сортировка -->
+        <select name="sort-patter" id="sort-patter" th:if="${enable}">
+          <option value="priority">Приоритет</option>
+          <option value="date">Дата исполнения</option>
+          <option value="name">Название</option>
+        </select>
       </div>
     </div>
   </main>
@@ -75,6 +79,7 @@
           <div class="group">
             <p class="params" th:text="${task.createAt}"></p>
             <p class="params" th:text="${task.completed}"></p>
+            <p class="params" th:text="${task.getNamePriority}"></p>
           </div>
 
           <div class="group">

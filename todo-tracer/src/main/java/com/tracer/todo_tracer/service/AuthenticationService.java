@@ -4,7 +4,6 @@ import com.tracer.todo_tracer.dto.AuthenticationDto;
 import com.tracer.todo_tracer.dto.PasswordDto;
 import com.tracer.todo_tracer.dto.RegistrationDto;
 import com.tracer.todo_tracer.entity.UserEntity;
-import com.tracer.todo_tracer.exception.ExceptionConvertPriority;
 import com.tracer.todo_tracer.exception.ExistUserWithByLoginException;
 import com.tracer.todo_tracer.model.UserModel;
 import com.tracer.todo_tracer.repository.UserRepository;
@@ -52,7 +51,6 @@ public class AuthenticationService {
 
         if(!authDto.getEmail().contains("@")){
             UserEntity userEntity = userRepository.findByLogin(authDto.getEmail()).orElseThrow();
-            System.out.println(userEntity.getEmail());
             authDto.setEmail(userEntity.getEmail());
         }
 
@@ -83,7 +81,10 @@ public class AuthenticationService {
         entity.setLastname(user.getLastname());
         entity.setEmail(user.getEmail());
         entity.setLogin(user.getLogin());
-        entity.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        if(!user.getPassword().isEmpty()) {
+            entity.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
 
         entity.setToken(jwtService.generateToken(entity));
 
@@ -113,6 +114,9 @@ public class AuthenticationService {
     public boolean isExpired(String login) {
 
         UserEntity userEntity = userRepository.findByLogin(login).orElseThrow();
+
+        if(userEntity.getToken().isEmpty()) return true;
+
         return jwtService.isTokenExpired(userEntity.getToken());
     }
 

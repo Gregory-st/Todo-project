@@ -2,6 +2,7 @@ package com.tracer.todo_tracer.controller;
 
 import com.tracer.todo_tracer.dto.StatusTodoDto;
 import com.tracer.todo_tracer.exception.ExceptionNotFoundTodo;
+import com.tracer.todo_tracer.model.TodoModel;
 import com.tracer.todo_tracer.response.BaseSuccessResponse;
 import com.tracer.todo_tracer.response.RedirectResponse;
 import com.tracer.todo_tracer.service.AuthenticationService;
@@ -12,6 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
+import java.util.Map;
+
 @Controller
 @RequestMapping("/v1/todo")
 @RequiredArgsConstructor
@@ -19,6 +23,8 @@ public class MainController {
 
     private final TodoService todoService;
     private final AuthenticationService authService;
+    private String nameComparator = "priority";
+    private final Map<String, Comparator<TodoModel>> comparators;
 
     @GetMapping
     public String mainPage(Model model){
@@ -34,13 +40,30 @@ public class MainController {
     @GetMapping("/{login}")
     public String homePage(@PathVariable String login, Model model){
 
-        if(authService.isExpired(login)) return "redirect:/v1/todo/person/auth";
+        try {
+            if (authService.isExpired(login)) return "redirect:/v1/todo/person/auth";
+        }
+        catch (Exception e){
+            return "redirect:/v1/todo/person/auth";
+        }
 
-        model.addAttribute("tasks", todoService.getTodos(login));
+        model.addAttribute("tasks", todoService.getTodos(login, comparators.get(nameComparator)));
         model.addAttribute("urlCreate", login + "/createTodo");
         model.addAttribute("urlSettings", login + "/person");
+        model.addAttribute("enable", true);
 
         return "index";
+    }
+
+    @PatchMapping("/{login}/{sort}")
+    public ResponseEntity<BaseSuccessResponse> changeSorted(@PathVariable String login,
+                                                            @PathVariable String sort){
+        nameComparator = sort;
+        return ResponseEntity.ok(BaseSuccessResponse
+                .builder()
+                .success(true)
+                .statusCode(1)
+                .build());
     }
 
     @PutMapping("/{login}")

@@ -22,7 +22,7 @@
                 passwordInput.classList.add("shake");
                 return;
             }
-                fetch('http://localhost:8080/v1/todo/person/auth', {
+                fetch(window.location.href, {
 
                     method: 'POST',
 
